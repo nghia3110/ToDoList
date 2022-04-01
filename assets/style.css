@@ -1,0 +1,149 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    background: linear-gradient(145.44deg, #F2F4FA 0%, #FAFBFC 100%);
+}
+
+h4 {
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+li {
+    list-style-type: none;
+}
+
+.main {
+    padding: 15px;
+    width: 280px;
+    border-radius: 20px;
+    background-color: #152b36;
+    color: #fff;
+}
+
+.header {
+    background-color: #152b36;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.header .title {
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.header .menu-btn {
+    position: absolute;
+    right: 0;
+    top: 5px;
+    background-color: #152b36;
+    color: #fff;
+    font-size: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.header .menu-btn:hover {
+    opacity: 0.6;
+}
+
+.content .task-list .task-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 8px;
+    background: #4a595e;
+    border-radius: 5px;
+}
+
+.content .task-list .task-item:hover {
+    opacity: 0.8;
+}
+
+.task-item .task-content {
+    flex: 0 0 85%;
+}
+
+.task-item .delete-btn {
+    flex: 0 0 15%;
+    border: none;
+    font-size: 15px;
+    background-color: #4a595e;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type=checkbox] {
+    display: none;
+}
+
+input[type=checkbox]+label:before {
+    content: "\2714";
+    border: 0.1em solid #000;
+    border-radius: 0.2em;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    margin-right: 10px;
+    vertical-align: bottom;
+    color: transparent;
+    transition: .2s;
+}
+
+input[type=checkbox]+label:active:before {
+    transform: scale(0);
+}
+
+input[type=checkbox]:checked+label:before {
+    background-color: MediumSeaGreen;
+    border-color: MediumSeaGreen;
+    color: #fff;
+}
+
+input[type=checkbox]:disabled+label:before {
+    transform: scale(1);
+    border-color: #aaa;
+}
+
+input[type=checkbox]:checked:disabled+label:before {
+    transform: scale(1);
+    background-color: #bfb;
+    border-color: #bfb;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    background-color: #152b36;
+}
+
+.footer .add-task {
+    padding: 10px 16px;
+    border-radius: 50%;
+    border: none;
+    background-color: #1fe3b1;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.footer .add-task:hover {
+    opacity: 0.6;
+}
