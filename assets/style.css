@@ -99,6 +99,10 @@ li {
     cursor: pointer;
 }
 
+#task-list-completed label{
+    text-decoration: line-through;
+}
+
 input[type=checkbox] {
     display: none;
 }
