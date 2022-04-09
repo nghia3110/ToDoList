@@ -127,6 +127,7 @@ doingList.addEventListener('click', function(event){
     const element = event.target;
 
     removeCompTask(element, doingList);
+    if(taskComp == '') return;
     addCompTask();
     localStorage.setItem('doingLists', doingList.innerHTML);
     localStorage.setItem('completedLists', completedList.innerHTML);
@@ -137,6 +138,7 @@ completedList.addEventListener('click', function(event){
 
     removeTask(element, completedList);
     removeCompTask(element, completedList);
+    if(taskComp == '') return;
     addDoingTask();
     localStorage.setItem('doingLists', doingList.innerHTML);
     localStorage.setItem('completedLists', completedList.innerHTML);
