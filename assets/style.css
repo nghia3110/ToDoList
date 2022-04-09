@@ -61,6 +61,18 @@ li {
     opacity: 0.6;
 }
 
+.content .task-list {
+    overflow: scroll;
+    height: 220px;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    /* Remove scrollbar space */
+    background: transparent;
+    /* Optional: just make scrollbar invisible */
+}
+
 .content .task-list .task-item {
     display: flex;
     align-items: center;
@@ -146,4 +158,26 @@ input[type=checkbox]:checked:disabled+label:before {
 
 .footer .add-task:hover {
     opacity: 0.6;
+}
+
+/*  Modal */
+#add-modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    overflow: auto;
+    width: 280px;
+    height: 593px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+}
+
+#add-modal .modal-content{
+    color: #000;
+    background-color: #fefefe;
+    padding: 20px;
+    margin-top: 60%;
+    margin-left: 15px;
+    border: 1px solid #888;
+    width: 90%;
 }

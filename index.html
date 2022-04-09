@@ -11,6 +11,14 @@
 </head>
 
 <body>
+    <div id="add-modal">
+        <div class="modal-content">
+            <label for="input-task">Add your task here:</label>
+            <input type="text" id="input-task" placeholder="Enter your task">
+            <button id="accept-btn" class="accept-btn">Add</button>
+        </div>
+    </div>
+
     <div class="main">
         <div class="header">
             <span class="title">To Do List</span>
@@ -20,10 +28,10 @@
         <div class="content">
             <div class="doing">
                 <h4>Doing</h4>
-                <ul class="task-list">
+                <ul id="task-list-doing" class="task-list">
                     <li class="task-item">
                         <input type="checkbox" name="" id="task1">
-                        <label for="task1" class="task-content">Make a website</label>
+                        <label for="task1" class="task-content">Test</label>
                         <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
                     </li>
                     <li class="task-item">
@@ -36,45 +44,38 @@
                         <label for="task3" class="task-content">Test</label>
                         <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
                     </li>
-                    <li class="task-item">
-                        <input type="checkbox" name="" id="task4">
-                        <label for="task4" class="task-content">Test</label>
-                        <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
-                    </li>
-                    <li class="task-item">
-                        <input type="checkbox" name="" id="task5">
-                        <label for="task5" class="task-content">Test</label>
-                        <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
-                    </li>
-                    
+
                 </ul>
             </div>
             <div class="completed">
                 <h4>Completed</h4>
-                <ul class="task-list">
+                <ul id="task-list-completed" class="task-list" style="height: 180px;">
                     <li class="task-item">
-                        <input type="checkbox" name="" id="task6" checked>
-                        <label for="task6" class="task-content" style="text-decoration: line-through;">Make a website</label>
+                        <input type="checkbox" name="" id="completed1" checked>
+                        <label for="completed1" class="task-content" style="text-decoration: line-through;">Make a
+                            website</label> 
                         <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
                     </li>
                     <li class="task-item">
-                        <input type="checkbox" name="" id="task7" checked>
-                        <label for="task7" class="task-content" style="text-decoration: line-through;">Test</label>
+                        <input type="checkbox" name="" id="completed2" checked>
+                        <label for="completed2" class="task-content" style="text-decoration: line-through;">Test</label>
                         <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
                     </li>
                     <li class="task-item">
-                        <input type="checkbox" name="" id="task8" checked>
-                        <label for="task8" class="task-content" style="text-decoration: line-through;">Test</label>
+                        <input type="checkbox" name="" id="completed3" checked>
+                        <label for="completed3" class="task-content" style="text-decoration: line-through;">Test</label>
                         <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
                     </li>
                 </ul>
             </div>
 
             <div class="footer">
-                <button class="add-task"><i class="fa-thin fa-plus add-icon"></i></button>
+                <button id="add-btn" class="add-task"><i class="fa-thin fa-plus add-icon"></i></button>
             </div>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
