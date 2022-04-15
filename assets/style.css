@@ -179,9 +179,34 @@ input[type=checkbox]:checked:disabled+label:before {
 #add-modal .modal-content{
     color: #000;
     background-color: #fefefe;
-    padding: 20px;
-    margin-top: 60%;
-    margin-left: 15px;
+    margin-top: 80%;
+    margin-left: 28px;
     border: 1px solid #888;
-    width: 90%;
+    width: 80%;
+    position: relative;
+}
+
+.modal-content .input{
+    padding: 10px;
+    background-color: #273e38;
+}
+
+.input #input-task{
+    width: 100%;
+    border: none;
+    padding: 5px;
+    outline: none;
+    background-color: #273e38;
+    border-bottom: 1px solid #307f69;
+    color: #fff;
+}
+
+#input-task::placeholder{
+    color: #fff;
+}
+
+#accept-btn{
+    width: 100%;
+    border: none;
+    padding: 10px;
 }
