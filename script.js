@@ -7,17 +7,7 @@ var doingList = document.getElementById('task-list-doing');
 
 var completedList = document.getElementById('task-list-completed');
 
-/* Load Data From Storage */
-var saveDoing = localStorage.getItem('doingLists');
-var saveCompleted = localStorage.getItem('completedLists');
-
-if (saveDoing) {
-    doingList.innerHTML = saveDoing;
-}
-
-if (saveCompleted) {
-    completedList.innerHTML = saveCompleted;
-}
+var LIST;
 
 /* Modal */
 addBtn.onclick = function () {
@@ -32,10 +22,53 @@ window.onclick = function (event) {
     }
 }
 
+/* Load Data From Storage */
+var data = localStorage.getItem('lists');
+
+if (data) {
+    LIST = JSON.parse(data);
+    loadList();
+} else {
+    LIST = [];
+}
+
+function addTask(input, id, checked) {
+    if (!checked) {
+        const li = `<li class="task-item">
+        <input type="checkbox" name="" id="${id}">
+        <label for="${id}" class="task-content">${input}</label>
+        <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
+        </li>
+        `;
+        doingList.insertAdjacentHTML('beforeend', li);
+    } else {
+        const li = `<li class="task-item">
+        <input type="checkbox" name="" id="${id}" checked>
+        <label for="${id}" class="task-content">${input}</label>
+        <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
+        </li>
+        `;
+        completedList.insertAdjacentHTML("beforeend", li);
+    }
+}
+
+function pushToList(input) {
+    LIST.push({
+        name: input,
+        id: LIST.length,
+        checked: false
+    });
+    localStorage.setItem('lists', JSON.stringify(LIST));
+}
+
+function loadList(){
+    for(var i = 0; i < LIST.length; i++){
+        addTask(LIST[i].name, LIST[i].id, LIST[i].checked);
+    }
+}
+
 /* Add task */
 acceptBtn.onclick = function () {
-    var i = 0, itemCount = 0;
-    while (doingList.getElementsByTagName('li')[i++]) itemCount++;
 
     var taskInput = document.getElementById('input-task').value;
 
@@ -43,32 +76,14 @@ acceptBtn.onclick = function () {
         alert("Bạn chưa nhập nội dung của việc cần làm! Vui lòng nhập nội dung trước khi thêm!");
         return;
     }
-
-    const li = `<li class="task-item">
-    <input type="checkbox" name="" id="task${itemCount + 1}">
-    <label for="task${itemCount + 1}" class="task-content">${taskInput}</label>
-    <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
-    </li>
-    `
-    doingList.insertAdjacentHTML('beforeend', li);
-    localStorage.setItem('doingLists', doingList.innerHTML);
+    addTask(taskInput, LIST.length, false);
+    pushToList(taskInput);
     addModal.style.display = "none";
 }
 
 /* Delete task */
-function changeInputID(tempID, ls) {
-    var index = parseInt(tempID.slice(-1));
-    var s = tempID.slice(0, tempID.length - 1);
-    var item = ls.getElementsByTagName('li');
 
-    if (index == item.length + 1) return;
-    for (var i = index - 1; i < item.length; i++) {
-        item[i].getElementsByTagName('input')[0].id = `${s}${i + 1}`;
-        item[i].getElementsByTagName('label')[0].setAttribute('for', `${s}${i + 1}`);
-    }
-}
-
-function removeTask(elm, lst) {
+function removeTask(elm) {
     const elementClass = elm.className;
     var ID = '';
     if (elementClass == "delete-btn") {
@@ -79,72 +94,50 @@ function removeTask(elm, lst) {
         elm.parentElement.parentElement.remove();
     }
     if (ID == '') return;
-    changeInputID(ID, lst);
+    LIST.splice(ID,1);
+    for(var i = ID; i < LIST.length; i++){
+        LIST[i].id--;
+    }
 }
 
 /* Add Completed Task */
 var taskComp = '';
+var tempID;
 
-function removeCompTask(elm, lst) {
+function removeCompTask(elm) {
     const elementClass = elm.className;
     var ID = '';
     ID = elm.getAttribute('for');
+    tempID = ID;
     taskComp = elm.textContent;
     elm.parentElement.remove();
     if (ID == '') return;
-    changeInputID(ID, lst);
-}
-
-function addCompTask() {
-    var i = 0, itemCount = 0;
-    while (completedList.getElementsByTagName('li')[i++]) itemCount++;
-
-    const li = `<li class="task-item">
-    <input type="checkbox" name="" id="completed${itemCount + 1}" checked>
-    <label for="completed${itemCount + 1}" class="task-content">${taskComp}</label>
-    <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
-    </li>
-    `
-    completedList.insertAdjacentHTML('beforeend', li);
-}
-
-function addDoingTask() {
-    var i = 0, itemCount = 0;
-    while (doingList.getElementsByTagName('li')[i++]) itemCount++;
-
-    const li = `<li class="task-item">
-    <input type="checkbox" name="" id="task${itemCount + 1}">
-    <label for="task${itemCount + 1}" class="task-content">${taskComp}</label>
-    <button class="delete-btn"><i class="fa-solid fa-trash-can"></i></button>
-    </li>
-    `
-    doingList.insertAdjacentHTML('beforeend', li);
+    if(LIST[ID].checked) LIST[ID].checked = false;
+    else LIST[ID].checked = true;
 }
 
 doingList.addEventListener('click', function (event) {
     const element = event.target;
     if (element.className == 'delete-btn' || element.className == 'fa-solid fa-trash-can') {
-        removeTask(element, doingList);
+        removeTask(element);
     }
     if (element.className == 'task-content') {
-        removeCompTask(element, doingList);
+        removeCompTask(element);
         if (taskComp == '') return;
-        addCompTask();
+        addTask(taskComp, tempID, true);
     }
-    localStorage.setItem('doingLists', doingList.innerHTML);
-    localStorage.setItem('completedLists', completedList.innerHTML);
+    localStorage.setItem('lists', JSON.stringify(LIST));
 });
 
 completedList.addEventListener('click', function (event) {
     const element = event.target;
     if (element.className == 'delete-btn' || element.className == 'fa-solid fa-trash-can') {
-        removeTask(element, completedList);
+        removeTask(element);
     }
     if (element.className == 'task-content') {
-        removeCompTask(element, completedList);
+        removeCompTask(element);
         if (taskComp == '') return;
-        addDoingTask();
+        addTask(taskComp, tempID, false);
     }
-    localStorage.setItem('doingLists', doingList.innerHTML);
-    localStorage.setItem('completedLists', completedList.innerHTML);
+    localStorage.setItem('lists', JSON.stringify(LIST));
 });
