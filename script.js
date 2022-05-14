@@ -1,6 +1,8 @@
 /* Variables */
 var addBtn = document.getElementById('add-btn');
 var addModal = document.getElementById('add-modal');
+var menuBtn = document.getElementById('menu-btn');
+var sidebar = document.getElementById('sidebar');
 
 var acceptBtn = document.getElementById('accept-btn');
 var doingList = document.getElementById('task-list-doing');
@@ -8,6 +10,11 @@ var doingList = document.getElementById('task-list-doing');
 var completedList = document.getElementById('task-list-completed');
 
 var LIST;
+
+/* Menu */
+menuBtn.onclick = function() {
+    sidebar.style.display = "block";
+}
 
 /* Modal */
 addBtn.onclick = function () {
@@ -19,6 +26,9 @@ addBtn.onclick = function () {
 window.onclick = function (event) {
     if (event.target == addModal) {
         addModal.style.display = "none";
+    }
+    if(event.target == sidebar){
+        sidebar.style.display = "none";
     }
 }
 

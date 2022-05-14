@@ -10,14 +10,6 @@ html, body {
     line-height: 1.5;
 }
 
-body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 20px;
-    background: linear-gradient(145.44deg, #F2F4FA 0%, #FAFBFC 100%);
-}
-
 h4 {
     font-size: 18px;
     margin-bottom: 8px;
@@ -27,12 +19,34 @@ li {
     list-style-type: none;
 }
 
-.main {
-    padding: 15px;
-    width: 280px;
-    border-radius: 20px;
-    background-color: #152b36;
-    color: #fff;
+@media screen and (max-width: 768px){
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 20px;
+        background: linear-gradient(145.44deg, #F2F4FA 0%, #FAFBFC 100%);
+    }
+
+    .main {
+        padding: 15px;
+        width: 280px;
+        border-radius: 20px;
+        background-color: #152b36;
+        color: #fff;
+    }
+
+    .left{
+        display: none;
+    }
+
+    .right .search-bar{
+        display: none;
+    }
+
+    .right .search-icon{
+        display: none;
+    }
 }
 
 .header {
@@ -46,7 +60,7 @@ li {
     font-weight: 300;
 }
 
-.header .menu-btn {
+.header #menu-btn {
     position: absolute;
     right: 0;
     top: 5px;
@@ -57,7 +71,7 @@ li {
     cursor: pointer;
 }
 
-.header .menu-btn:hover {
+.header #menu-btn:hover {
     opacity: 0.6;
 }
 
@@ -176,6 +190,7 @@ input[type=checkbox]:checked:disabled+label:before {
     border-radius: 20px;
 }
 
+
 #add-modal .modal-content{
     color: #000;
     background-color: #fefefe;
@@ -209,4 +224,66 @@ input[type=checkbox]:checked:disabled+label:before {
     width: 100%;
     border: none;
     padding: 10px;
+}
+
+/* Sidebar */
+#sidebar{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    overflow: auto;
+    width: 280px;
+    height: 593px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+}
+
+.sidebar-content{
+    display: flex;
+    flex-direction: column;
+    float: right;
+    width: 70%;
+    height: 100%;
+    background-color: #1fe3b1;
+    animation: click-animate ease 0.5s;
+}
+
+.sidebar-content .sidebar-title{
+    font-size: 20px;
+    font-weight: 200;
+    padding: 10px 20px;
+}
+
+.sidebar-content .icon-list-top{
+    flex: 40%;
+}
+
+.sidebar-content li{
+    padding: 5px;
+    margin: 20px;
+}
+
+.sidebar-content li>a:hover{
+    opacity: 0.5;
+}
+
+.sidebar-content a{
+    color: #000;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.sidebar-content a>i{
+    padding-right: 20px;
+}
+
+@keyframes click-animate{
+    from{
+        opacity: 0;
+        transform: translateX(140px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
